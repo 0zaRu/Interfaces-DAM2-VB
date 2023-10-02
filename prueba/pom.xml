@@ -12,4 +12,11 @@
         <exec.mainClass>com.mycompany.prueba.Prueba</exec.mainClass>
     </properties>
     <name>U1</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE190</version>
+        </dependency>
+    </dependencies>
 </project>
