@@ -109,7 +109,10 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    public static javax.swing.JLabel lMuestra;
+    private static javax.swing.JLabel lMuestra;
     // End of variables declaration//GEN-END:variables
 
+    protected static void recibeDatos(String nombre, String apellidos){
+        lMuestra.setText("Bienvenido "+nombre+" "+apellidos+".");
+    }
 }

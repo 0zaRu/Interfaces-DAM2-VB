@@ -4,7 +4,6 @@
  */
 package formulario2ventanas;
 
-import static formulario2ventanas.Ventana.lMuestra;
 import javax.swing.JFrame;
 
 /**
@@ -87,7 +86,7 @@ public class DialogVentana2 extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(!tNombre.getText().isEmpty() || !tApellidos.getText().isEmpty())
-            Ventana.lMuestra.setText("Bienvenido "+tNombre.getText()+" "+tApellidos.getText()+".");
+            Ventana.recibeDatos(tNombre.getText(), tApellidos.getText());
         
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
