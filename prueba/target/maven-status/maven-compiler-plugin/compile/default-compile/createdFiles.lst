@@ -1,5 +1,6 @@
 dialog\VentanaDialog$2$1.class
 inout\Ventana$2.class
+tabla2ventymenu\Ventana$2.class
 formulario2ventanas\DialogVentana2$2$1.class
 com\mycompany\prueba\Ventana.class
 radio_combo_spinner\Ventana$2.class
@@ -7,6 +8,7 @@ sumar\VentanaSuma$5.class
 formulario2ventanas\Ventana.class
 sumar\VentanaSuma$1.class
 tablaDatos\VentanaTabla.class
+tabla2ventymenu\DialogVentana2$2.class
 com\mycompany\prueba\Ventana$4.class
 tablaDatos\VentanaTabla$6.class
 formulario_completo\Ventana$4.class
@@ -23,6 +25,7 @@ dialog\Ventana$3.class
 formulario_completo\Ventana$1.class
 formulario_completo\Ventana$8.class
 tablaDatos\VentanaTabla$9.class
+tabla2ventymenu\Ventana$1.class
 tablaDatos\VentanaTabla$2.class
 com\mycompany\prueba\Ventana$2.class
 inout\VentanaDialog$2.class
@@ -32,6 +35,7 @@ dialog\VentanaDialog$2.class
 radio_combo_spinner\Ventana$1.class
 sumar\VentanaSuma$7.class
 sumar\VentanaSuma$4.class
+tabla2ventymenu\DialogVentana2$3.class
 radio_combo_spinner\Ventana$4.class
 sumar\VentanaSuma$3.class
 tablaDatos\VentanaTabla$8.class
@@ -39,11 +43,15 @@ formulario_completo\Ventana$2.class
 tablaDatos\VentanaTabla$11.class
 com\mycompany\prueba\Ventana$3.class
 formulario_completo\Ventana$9.class
+tabla2ventymenu\DialogVentana2$1.class
 tablaDatos\VentanaTabla$1.class
 tablaDatos\VentanaTabla$5.class
 formulario_completo\Ventana$5.class
 sumar\VentanaSuma$6.class
+tabla2ventymenu\DialogVentana2$3$1.class
+tabla2ventymenu\DialogVentana2.class
 tablaDatos\Colorchoose$2.class
+tabla2ventymenu\Ventana.class
 inout\VentanaDialog.class
 inout\Ventana$1.class
 formulario2ventanas\DialogVentana2.class
@@ -53,6 +61,7 @@ dialog\Ventana.class
 formulario_completo\Ventana.class
 radio_combo_spinner\Ventana$5.class
 sumar\VentanaSuma$2.class
+tabla2ventymenu\Ventana$3.class
 com\mycompany\prueba\Prueba.class
 tablaDatos\VentanaTabla$10.class
 inout\Ventana$3.class
