@@ -15,6 +15,9 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+        
+        pJubilado.setVisible(false);
+        pEmpleado.setVisible(false);
     }
 
     /**
@@ -305,7 +308,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pJubilado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
@@ -323,11 +326,17 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_tNombreActionPerformed
 
     private void rEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rEmpleadoActionPerformed
-        // TODO add your handling code here:
+        if(rEmpleado.isSelected()){
+            pEmpleado.setVisible(true);
+            pJubilado.setVisible(false);
+        }
     }//GEN-LAST:event_rEmpleadoActionPerformed
 
     private void rJubiladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rJubiladoActionPerformed
-        // TODO add your handling code here:
+        if(rJubilado.isSelected()){
+            pJubilado.setVisible(true);
+            pEmpleado.setVisible(false);
+        }
     }//GEN-LAST:event_rJubiladoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -335,26 +344,23 @@ public class Ventana extends javax.swing.JFrame {
         try{
             if(!tId.getText().isEmpty() && !tNombre.getText().isEmpty() && !tDni.getText().isEmpty() && !tDomicilio.getText().isEmpty() && !tTelefono.getText().isEmpty()){
                 int id = Integer.parseInt(tId.getText());
-
+            System.out.println("Paso por el primer if");
                 if(rEmpleado.isSelected() && !tCodigo.getText().isEmpty() && !tCargo.getText().isEmpty() && !tSueldo.getText().isEmpty()){
-                    int codigo = Integer.parseInt(tCodigo.getText());
-                    double sueldo = Double.parseDouble(tSueldo.getText());
-                    
-                    //Empleado nuevoEmp = new Empleado();
-                    //areaMuestra.add(nuevoEmp+"\n");
+                    System.out.println("Paso por el segundo if");
+                    Empleado nuevoEmp = new Empleado(Integer.parseInt(tCodigo.getText()), tCargo.getText(), Double.parseDouble(tSueldo.getText()), Integer.parseInt(tId.getText()), tNombre.getText(), tDni.getText(), tDomicilio.getText(), tTelefono.getText());                    
+                    areaMuestra.setText(areaMuestra.getText()+nuevoEmp+"\n");
 
                 }else if(!tSueldoJub.getText().isEmpty() && !tOcupacion.getText().isEmpty() && !tEdad.getText().isEmpty()){
-                    double sueldoJub = Double.parseDouble(tSueldoJub.getText());
-                    int edad = Integer.parseInt(tEdad.getText());
                     
-                    //Jubilado nuevoJub = new Jubilado();
-                    //areaMuestra.add(nuevoJub+"\n");
-                }
-                //else
-                    //FALTA HACER DIALOGO DE CAMPO VACIO
+                    Jubilado nuevoJub = new Jubilado(Double.parseDouble(tSueldoJub.getText()), tOcupacion.getText(), Integer.parseInt(tEdad.getText()), Integer.parseInt(tId.getText()), tNombre.getText(), tDni.getText(), tDomicilio.getText(), tTelefono.getText());
+                    areaMuestra.setText(areaMuestra.getText()+nuevoJub+"\n");                }
+                    System.out.println("Paso por el segundo if");
+                
+                }else
+                    System.out.println("Hay algun campo vacio");
 
-            }
         }catch(Exception e){
+            System.out.println("Paso por el error");
             //FALTA HACER DIALOGO DE ERROR
         }
     }//GEN-LAST:event_jButton1ActionPerformed
