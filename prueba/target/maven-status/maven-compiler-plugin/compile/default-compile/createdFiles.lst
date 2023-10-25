@@ -7,6 +7,7 @@ formulario2ventanas\Ventana.class
 sumar\VentanaSuma$1.class
 tablaDatos\VentanaTabla.class
 tabla2ventymenu\DialogVentana2$2.class
+FileChooser\VentanaFChooser$2.class
 dialog\Ventana$1.class
 radio_combo_spinner\Ventana.class
 formulario_completo\Ventana$8.class
@@ -20,6 +21,7 @@ listas2\VentanaListas$1.class
 sumar\VentanaSuma$7.class
 herencia\Centro.class
 sumar\VentanaSuma$4.class
+FileChooser\VentanaFChooser.class
 sumar\VentanaSuma$3.class
 formulario_completo\Ventana$2.class
 formulario_completo\Ventana$9.class
@@ -31,6 +33,7 @@ formulario2ventanas\DialogVentana2.class
 tablaDatos\VentanaTabla$4.class
 formulario_completo\Ventana.class
 sumar\VentanaSuma$2.class
+FileChooser\VentanaFChooser$3.class
 listas\VentanaListas$2.class
 com\mycompany\prueba\Prueba.class
 inout\Ventana$3.class
@@ -64,6 +67,7 @@ inout\Ventana.class
 listas2\VentanaListas$5.class
 radio_combo_spinner\Ventana$1.class
 tabla2ventymenu\DialogVentana2$3.class
+FileChooser\VentanaFChooser$1.class
 tablaDatos\VentanaTabla$8.class
 com\mycompany\prueba\Ventana$3.class
 tabla2ventymenu\DialogVentana2$1.class
