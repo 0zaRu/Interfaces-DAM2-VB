@@ -7,8 +7,8 @@ package com.mycompany.ejercicico_herencia;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -488,25 +488,39 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_rJubiladoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        if(!compruebaCampoVacio(tId, "ID") ||
+            !compruebaCampoVacio(tNombre, "NOMBRE") ||
+            !compruebaCampoVacio(tDni, "DNI") ||
+            !compruebaCampoVacio(tDomicilio, "DOMICILIO") ||
+            !compruebaCampoVacio(tTelefono, "TELEFONO"))
+                return;
+        
         
         try{
-            if(!tId.getText().isEmpty() && !tNombre.getText().isEmpty() && !tDni.getText().isEmpty() && !tDomicilio.getText().isEmpty() && !tTelefono.getText().isEmpty()){
-                int id = Integer.parseInt(tId.getText());
-            System.out.println("Paso por el primer if");
-                if(rEmpleado.isSelected() && !tCodigo.getText().isEmpty() && !tCargo.getText().isEmpty() && !tSueldo.getText().isEmpty()){
-                    System.out.println("Paso por el segundo if");
-                    Empleado nuevoEmp = new Empleado(Integer.parseInt(tCodigo.getText()), tCargo.getText(), Double.parseDouble(tSueldo.getText()), Integer.parseInt(tId.getText()), tNombre.getText(), tDni.getText(), tDomicilio.getText(), tTelefono.getText());                    
-                    areaMuestra.setText(areaMuestra.getText()+nuevoEmp+"\n");
+            if(rEmpleado.isSelected()){
+                
+                if(!compruebaCampoVacio(tCodigo, "CODIGO") ||
+                    !compruebaCampoVacio(tCargo, "CARGO") ||
+                    !compruebaCampoVacio(tSueldo, "SUELDO"))
+                        return;
+                
+                Empleado nuevoEmp = new Empleado(Integer.parseInt(tCodigo.getText()), tCargo.getText(), Double.parseDouble(tSueldo.getText()), Integer.parseInt(tId.getText()), tNombre.getText(), tDni.getText(), tDomicilio.getText(), tTelefono.getText());                    
+                areaMuestra.setText(areaMuestra.getText()+nuevoEmp+"\n");
 
-                }else if(!tSueldoJub.getText().isEmpty() && !tOcupacion.getText().isEmpty() && !tEdad.getText().isEmpty()){
+                }else if(rJubilado.isSelected()){
+                    if(!compruebaCampoVacio(tSueldoJub, "ID") ||
+                        !compruebaCampoVacio(tOcupacion, "ID") ||
+                        !compruebaCampoVacio(tEdad, "ID"))
+                            return;
                     
                     Jubilado nuevoJub = new Jubilado(Double.parseDouble(tSueldoJub.getText()), tOcupacion.getText(), Integer.parseInt(tEdad.getText()), Integer.parseInt(tId.getText()), tNombre.getText(), tDni.getText(), tDomicilio.getText(), tTelefono.getText());
-                    areaMuestra.setText(areaMuestra.getText()+nuevoJub+"\n");                }
-                    System.out.println("Paso por el segundo if");
+                    areaMuestra.setText(areaMuestra.getText()+nuevoJub+"\n");
                 
                 }else
-                    JOptionPane.showMessageDialog(this, "Alguno de los campos está vacío", "Error", JOptionPane.ERROR_MESSAGE);
-
+                    JOptionPane.showMessageDialog(this, "Ningun tipo de persona seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
+                
+                
         }catch(Exception e){
             System.out.println("Paso por el error");
             //FALTA HACER DIALOGO DE ERROR
@@ -631,4 +645,13 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField tSueldoJub;
     private javax.swing.JTextField tTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private boolean compruebaCampoVacio(JTextField textField, String nombreCampo) {
+            if(textField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "El campo "+ nombreCampo + "está vacío", "Campo vacío", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else
+                return true;
+    }
 }
