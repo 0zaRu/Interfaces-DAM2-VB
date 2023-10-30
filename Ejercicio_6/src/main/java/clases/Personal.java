@@ -1,24 +1,29 @@
 package clases;
 
-public class Personal {
+public abstract class Personal {
     private String nombre;
     private String dni;
     private String direccion;
+    private String telefono;
     private int partidosGanados;
     
-    public Personal(String nombre, String dni, String direccion, int partidosGanados) {
+    public Personal(String nombre, String dni, String direccion, String telefono, int partidosGanados) {
         this.nombre = nombre;
         this.dni = dni;
         this.direccion = direccion;
+        this.telefono = telefono;
         this.partidosGanados = partidosGanados;
     }
     
-    public Personal(String nombre, String dni, String direccion) {
+    public Personal(String nombre, String dni, String direccion, String telefono) {
         this.nombre = nombre;
         this.dni = dni;
         this.direccion = direccion;
+        this.telefono = telefono;
         this.partidosGanados = -1;
     }
+    
+    public abstract double getSueldoFinal();
     
     public String getNombre() {
         return nombre;
@@ -43,7 +48,7 @@ public class Personal {
     @Override
     public String toString() {
         
-        String devolver = "Personal: " + "Nombre: " + nombre + ", DNI: " + dni + ", Dirección: " + direccion;
+        String devolver = "Personal: " + "Nombre: " + nombre + ", DNI: " + dni + ", Dirección: " + direccion + ", Teléfono: " + telefono;
         
         if(partidosGanados != -1)
             return devolver + ", Partidos Ganados: " + partidosGanados + " ";
@@ -51,6 +56,4 @@ public class Personal {
         else
             return devolver;
     }
-    
-    
 }

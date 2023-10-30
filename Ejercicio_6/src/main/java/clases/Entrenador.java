@@ -12,12 +12,17 @@ public class Entrenador extends Personal{
     private double sueldo;
     private double plusPartidoGanado;
 
-    public Entrenador(double sueldo, double plusPartidoGanado, String nombre, String dni, String direccion, int partidosGanados) {
-        super(nombre, dni, direccion, partidosGanados);
+    public Entrenador(double sueldo, double plusPartidoGanado, String nombre, String dni, String direccion, String telefono, int partidosGanados) {
+        super(nombre, dni, direccion, telefono, partidosGanados);
         this.sueldo = sueldo;
         this.plusPartidoGanado = plusPartidoGanado;
     }
 
+    @Override
+    public double getSueldoFinal() {
+        return getSueldo() + (getPartidosGanados() * plusPartidoGanado);
+    }
+    
     public double getSueldo() {
         return sueldo;
     }
@@ -28,6 +33,6 @@ public class Entrenador extends Personal{
 
     @Override
     public String toString() {
-        return super.toString() + " || Entrenador: " + "Sueldo: " + sueldo + ", Plus por Partido Ganado: " + plusPartidoGanado;
+        return super.toString() + "\n|| Entrenador: " + "Sueldo: " + sueldo + ", Plus por Partido Ganado: " + plusPartidoGanado + "\n||Sueldo final del entrenador: "+ getSueldoFinal() + "\n\n";
     }
 }

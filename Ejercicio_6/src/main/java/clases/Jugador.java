@@ -16,8 +16,8 @@ public class Jugador extends Personal{
     private int numeroGoles;
     private double plusPorGol;
 
-    public Jugador(String posicion, double sueldo, String fechaNacimiento, double plusPartidoGanado, int numeroGoles, double plusPorGol, String nombre, String dni, String direccion, int partidosGanados) {
-        super(nombre, dni, direccion, partidosGanados);
+    public Jugador(String posicion, double sueldo, String fechaNacimiento, double plusPartidoGanado, int numeroGoles, double plusPorGol, String nombre, String dni, String direccion, String telefono, int partidosGanados) {
+        super(nombre, dni, direccion, telefono, partidosGanados);
         this.posicion = posicion;
         this.sueldo = sueldo;
         this.fechaNacimiento = fechaNacimiento;
@@ -26,6 +26,7 @@ public class Jugador extends Personal{
         this.plusPorGol = plusPorGol;
     }
 
+    @Override
     public double getSueldoFinal(){
         return sueldo + (getPartidosGanados()*plusPartidoGanado) + (numeroGoles * plusPorGol);
     }
@@ -56,6 +57,6 @@ public class Jugador extends Personal{
 
     @Override
     public String toString() {
-        return " || Jugador: " + "Posición: " + posicion + ", Sueldo: " + sueldo + ", Fecha de nacimiento: " + fechaNacimiento + ", Plus por Partido Ganado: " + plusPartidoGanado + ", Número de Goles:" + numeroGoles + ", Plus por Gol:" + plusPorGol;
+        return super.toString() + "\n|| Jugador: " + "Posición: " + posicion + ", Sueldo: " + sueldo + ", Fecha de nacimiento: " + fechaNacimiento + ", Plus por Partido Ganado: " + plusPartidoGanado + ", Número de Goles:" + numeroGoles + ", Plus por Gol:" + plusPorGol + "\n||Sueldo final del jugador: "+ getSueldoFinal() + "\n\n";
     }
 }

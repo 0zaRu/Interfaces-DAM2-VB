@@ -14,13 +14,14 @@ public class Directivo extends Personal{
     private double sueldo;
     private boolean activo;
 
-    public Directivo(String cargo, double sueldo, boolean activo, String nombre, String dni, String direccion) {
-        super(nombre, dni, direccion);
+    public Directivo(String cargo, double sueldo, boolean activo, String nombre, String dni, String direccion, String telefono) {
+        super(nombre, dni, direccion, telefono);
         this.cargo = cargo;
         this.sueldo = sueldo;
         this.activo = activo;
     }    
     
+    @Override
     public double getSueldoFinal() {
         return getSueldo();
     }
@@ -39,6 +40,6 @@ public class Directivo extends Personal{
     
     @Override
     public String toString() {
-        return super.toString() + " || Directivo: " + "Cargo: " + cargo + ", Sueldo: " + sueldo + ", Activo: " + activo;
+        return super.toString() + "\n|| Directivo: " + "Cargo: " + cargo + ", Sueldo: " + sueldo + ", Activo: " + activo + "\n||Sueldo final del directivo: "+ getSueldoFinal() + "\n\n";
     }
 }

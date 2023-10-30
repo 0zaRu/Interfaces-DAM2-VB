@@ -11,17 +11,24 @@ package clases;
 public class Mantenedor extends Personal{
     private double sueldo;
     private boolean fijo;
+    private double plusFijo = -1;
 
-    public Mantenedor(double sueldo, boolean fijo, String nombre, String dni, String direccion) {
-        super(nombre, dni, direccion);
+    public Mantenedor(double sueldo, boolean fijo, double plusFijo, String nombre, String dni, String direccion, String telefono) {
+        super(nombre, dni, direccion, telefono);
         this.sueldo = sueldo;
-        this.fijo = fijo;
         
-        //TE FALTA TRABAJARTE EL FIJO, QUELOS STADOS DEPENDIENTES DE BOOLEAN NO GENEREN PROBLEMAS Y LOS PLUSPARTIDOGANADO
+        if((this.fijo = fijo))
+            this.plusFijo = plusFijo;
+        
     }
 
-    public double getPlusPartidoGanado() {
-        return 12;
+    @Override
+    public double getSueldoFinal() {
+        
+        if(fijo)
+            return getSueldo();
+        else
+            return getSueldo() + getPlusFijo();
     }
     
     public double getSueldo() {
@@ -31,9 +38,13 @@ public class Mantenedor extends Personal{
     public boolean isFijo() {
         return fijo;
     }
+    
+    public double getPlusFijo() {
+        return plusFijo;
+    }
 
     @Override
     public String toString() {
-        return super.toString() + " || Mantenedor: " + "Sueldo: " + sueldo + ", Fijo: " + fijo;
+        return super.toString() + "\n|| Mantenedor: " + "Sueldo: " + sueldo + ", Fijo: " + fijo + "\n||Sueldo final del mantenedor: "+ getSueldoFinal() + "\n\n";
     }
 }
