@@ -40,6 +40,7 @@ public class Directivo extends Personal{
     
     @Override
     public String toString() {
-        return super.toString() + "\n|| Directivo: " + "Cargo: " + cargo + ", Sueldo: " + sueldo + ", Activo: " + activo + "\n||Sueldo final del directivo: "+ getSueldoFinal() + "\n\n";
+        //return super.toString() + "\n|| Directivo: " + "Cargo: " + cargo + ", Sueldo: " + sueldo + ", Activo: " + activo + "\n||Sueldo final del directivo: "+ getSueldoFinal() + "\n\n";
+        return "Directivo: "+getNombre()+" | DNI: "+getDni()+" | Cargo: "+getCargo()+" | Sueldo final: "+getSueldoFinal();
     }
 }

@@ -965,21 +965,25 @@ public class VentanaMain extends javax.swing.JFrame {
     }//GEN-LAST:event_tJPlusPorGolActionPerformed
 
     private void jmiGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGrabarActionPerformed
-        switch(tpGeneral.getSelectedIndex()){
-            case 0: //JUGADORES
-                grabarJugador();
-            break;
-            case 1: //ENTRENADORES
-                grabarEntrenador();
-            break;    
-            case 2: //MANTENEDORES
-                grabarMantenedor();
-            break;    
-            case 3: //DIRECTIVOS
-                grabarDirectivo();
-            break;    
-            default://CASO EXTRAÑO
-            break;
+        try{
+            switch(tpGeneral.getSelectedIndex()){
+                case 0: //JUGADORES
+                    grabarJugador();
+                break;
+                case 1: //ENTRENADORES
+                    grabarEntrenador();
+                break;    
+                case 2: //MANTENEDORES
+                    grabarMantenedor();
+                break;    
+                case 3: //DIRECTIVOS
+                    grabarDirectivo();
+                break;    
+                default://CASO EXTRAÑO
+                break;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Alguno de los campos introducidos no tiene un formato válido. Probablemente será un valor numérico", "Error de formato", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jmiGrabarActionPerformed
 
@@ -1139,7 +1143,7 @@ public class VentanaMain extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tpGeneral;
     // End of variables declaration//GEN-END:variables
     
-    private void grabarJugador() {
+    private void grabarJugador() throws Exception{
         if(!compruebaCampoVacio(tJNombre, "Nombre") ||
            !compruebaCampoVacio(tJDNI, "DNI") ||
            !compruebaCampoVacio(tJDireccion, "Dirección") ||
@@ -1162,22 +1166,22 @@ public class VentanaMain extends javax.swing.JFrame {
             return;
         }
         
-        //FALTA FORMATEAR FECHA
-        Jugador nuevoJugador = new Jugador(posicion, Double.parseDouble(tJSueldo.getText()), "fecha", Double.parseDouble(tJPlusPartidoGanado.getText()), Integer.parseInt(tJNumeroGoles.getText()), Double.parseDouble(tJPlusPorGol.getText()), tJNombre.getText(), tJDNI.getText(), tJDireccion.toString(), tJTelefono.getText(), Integer.parseInt(tJPGanados.getText()));
+        //FALTA FORMATEAR FECHA Y COMPROBAR CAMPOS NUMERICOS CON UNA EXCEPCION Y TRATADO DE ERRORES
+        Jugador nuevoJugador = new Jugador(posicion, Double.parseDouble(tJSueldo.getText()), "fecha", Double.parseDouble(tJPlusPartidoGanado.getText()), Integer.parseInt(tJNumeroGoles.getText()), Double.parseDouble(tJPlusPorGol.getText()), tJNombre.getText(), tJDNI.getText(), tJDireccion.getText().toString(), tJTelefono.getText(), Integer.parseInt(tJPGanados.getText()));
         
         areaMuestra.append(nuevoJugador.toString());
         
     }
 
-    private void grabarEntrenador() {
+    private void grabarEntrenador() throws Exception {
+        //COPIA, PEGA Y CAMBIA LOS ATRIBUTOS
+    }
+
+    private void grabarMantenedor() throws Exception {
         
     }
 
-    private void grabarMantenedor() {
-        
-    }
-
-    private void grabarDirectivo() {
+    private void grabarDirectivo() throws Exception {
         
     }
     

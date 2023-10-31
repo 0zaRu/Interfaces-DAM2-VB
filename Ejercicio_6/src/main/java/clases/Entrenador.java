@@ -33,6 +33,7 @@ public class Entrenador extends Personal{
 
     @Override
     public String toString() {
-        return super.toString() + "\n|| Entrenador: " + "Sueldo: " + sueldo + ", Plus por Partido Ganado: " + plusPartidoGanado + "\n||Sueldo final del entrenador: "+ getSueldoFinal() + "\n\n";
+        //return super.toString() + "\n|| Entrenador: " + "Sueldo: " + sueldo + ", Plus por Partido Ganado: " + plusPartidoGanado + "\n||Sueldo final del entrenador: "+ getSueldoFinal() + "\n\n";
+        return "Entrenador: "+getNombre()+" | DNI: "+getDni()+" | Sueldo final: "+getSueldoFinal();
     }
 }

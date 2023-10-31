@@ -45,6 +45,7 @@ public class Mantenedor extends Personal{
 
     @Override
     public String toString() {
-        return super.toString() + "\n|| Mantenedor: " + "Sueldo: " + sueldo + ", Fijo: " + fijo + "\n||Sueldo final del mantenedor: "+ getSueldoFinal() + "\n\n";
+        //return super.toString() + "\n|| Mantenedor: " + "Sueldo: " + sueldo + ", Fijo: " + fijo + "\n||Sueldo final del mantenedor: "+ getSueldoFinal() + "\n\n";
+        return "Mantenedor: "+getNombre()+" | DNI: "+getDni()+" | Sueldo final: "+getSueldoFinal();
     }
 }

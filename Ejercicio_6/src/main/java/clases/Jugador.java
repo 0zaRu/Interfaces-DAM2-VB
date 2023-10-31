@@ -57,6 +57,7 @@ public class Jugador extends Personal{
 
     @Override
     public String toString() {
-        return super.toString() + "\n|| Jugador: " + "Posición: " + posicion + ", Sueldo: " + sueldo + ", Fecha de nacimiento: " + fechaNacimiento + ", Plus por Partido Ganado: " + plusPartidoGanado + ", Número de Goles:" + numeroGoles + ", Plus por Gol:" + plusPorGol + "\n||Sueldo final del jugador: "+ getSueldoFinal() + "\n\n";
+        //return super.toString() + "\n|| Jugador: " + "Posición: " + posicion + ", Sueldo: " + sueldo + ", Fecha de nacimiento: " + fechaNacimiento + ", Plus por Partido Ganado: " + plusPartidoGanado + ", Número de Goles:" + numeroGoles + ", Plus por Gol:" + plusPorGol + "\n||Sueldo final del jugador: "+ getSueldoFinal() + "\n\n";
+        return "Jugador: "+getNombre()+" | DNI: "+getDni()+" | Cargo: "+getPosicion()+" | Sueldo final: "+getSueldoFinal();
     }
 }
