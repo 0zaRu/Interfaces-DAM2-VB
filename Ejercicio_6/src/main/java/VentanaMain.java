@@ -4,11 +4,13 @@ import clases.Entrenador;
 import clases.Jugador;
 import clases.Mantenedor;
 import clases.Personal;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -35,6 +37,8 @@ public class VentanaMain extends javax.swing.JFrame {
         
         modelo = new DefaultListModel<>();
         areaMuestra.setModel(modelo);
+        
+        labelIcono.setIcon(new ImageIcon("jugador.png"));
         
         lMPlusFijo.setVisible(false);
         tMPlusFijo.setVisible(false);
@@ -125,6 +129,7 @@ public class VentanaMain extends javax.swing.JFrame {
         cDActivo = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         areaMuestra = new javax.swing.JList<>();
+        labelIcono = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmiGrabar = new javax.swing.JMenuItem();
@@ -137,6 +142,15 @@ public class VentanaMain extends javax.swing.JFrame {
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestor Equipo Fútbol");
+
+        tpGeneral.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tpGeneralMouseClicked(evt);
+            }
+        });
+
+        pJugadores.setBackground(new java.awt.Color(153, 255, 153));
 
         jLabel1.setText("Nombre:");
 
@@ -153,10 +167,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tJDNIActionPerformed(evt);
             }
         });
+        tJDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJDNIKeyPressed(evt);
+            }
+        });
 
         tJNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tJNombreActionPerformed(evt);
+            }
+        });
+        tJNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJNombreKeyPressed(evt);
             }
         });
 
@@ -165,10 +189,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tJTelefonoActionPerformed(evt);
             }
         });
+        tJTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJTelefonoKeyPressed(evt);
+            }
+        });
 
         tJDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tJDireccionActionPerformed(evt);
+            }
+        });
+        tJDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJDireccionKeyPressed(evt);
             }
         });
 
@@ -177,12 +211,22 @@ public class VentanaMain extends javax.swing.JFrame {
                 tJPGanadosActionPerformed(evt);
             }
         });
+        tJPGanados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJPGanadosKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Sueldo:");
 
         tJSueldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tJSueldoActionPerformed(evt);
+            }
+        });
+        tJSueldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJSueldoKeyPressed(evt);
             }
         });
 
@@ -208,10 +252,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tJPlusPartidoGanadoActionPerformed(evt);
             }
         });
+        tJPlusPartidoGanado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJPlusPartidoGanadoKeyPressed(evt);
+            }
+        });
 
         tJNumeroGoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tJNumeroGolesActionPerformed(evt);
+            }
+        });
+        tJNumeroGoles.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJNumeroGolesKeyPressed(evt);
             }
         });
 
@@ -222,6 +276,11 @@ public class VentanaMain extends javax.swing.JFrame {
         tJPlusPorGol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tJPlusPorGolActionPerformed(evt);
+            }
+        });
+        tJPlusPorGol.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tJPlusPorGolKeyPressed(evt);
             }
         });
 
@@ -257,42 +316,43 @@ public class VentanaMain extends javax.swing.JFrame {
                                 .addComponent(bDelantero)))
                         .addComponent(tJTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tJPGanados, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, Short.MAX_VALUE)
+                .addGap(10, 22, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pJugadoresLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tJSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pJugadoresLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tJFechaNacimiento))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
-                        .addComponent(jLabel29)
+                    .addGroup(pJugadoresLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tJPlusPartidoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tJPlusPartidoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
+                                .addComponent(jLabel31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tJPlusPorGol, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
+                                .addComponent(jLabel30)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tJNumeroGoles, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
-                        .addComponent(jLabel31)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tJPlusPorGol, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
-                        .addComponent(jLabel30)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tJNumeroGoles, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tJSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         pJugadoresLayout.setVerticalGroup(
             pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pJugadoresLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pJugadoresLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pJugadoresLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(pJugadoresLayout.createSequentialGroup()
                                 .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -343,16 +403,23 @@ public class VentanaMain extends javax.swing.JFrame {
                                 .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tJTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tJPGanados, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tJSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pJugadoresLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tJPGanados, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tJSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
         tpGeneral.addTab("Jugadores", pJugadores);
+
+        pEntrenadores.setBackground(new java.awt.Color(255, 153, 153));
 
         jLabel7.setText("Nombre:");
 
@@ -369,10 +436,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tEDNIActionPerformed(evt);
             }
         });
+        tEDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tEDNIKeyPressed(evt);
+            }
+        });
 
         tENombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tENombreActionPerformed(evt);
+            }
+        });
+        tENombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tENombreKeyPressed(evt);
             }
         });
 
@@ -381,16 +458,31 @@ public class VentanaMain extends javax.swing.JFrame {
                 tETelefonoActionPerformed(evt);
             }
         });
+        tETelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tETelefonoKeyPressed(evt);
+            }
+        });
 
         tEDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tEDireccionActionPerformed(evt);
             }
         });
+        tEDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tEDireccionKeyPressed(evt);
+            }
+        });
 
         tEPGanados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tEPGanadosActionPerformed(evt);
+            }
+        });
+        tEPGanados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tEPGanadosKeyPressed(evt);
             }
         });
 
@@ -401,6 +493,11 @@ public class VentanaMain extends javax.swing.JFrame {
                 tESueldoActionPerformed(evt);
             }
         });
+        tESueldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tESueldoKeyPressed(evt);
+            }
+        });
 
         jLabel26.setText("Plus partido ganado:");
 
@@ -409,12 +506,17 @@ public class VentanaMain extends javax.swing.JFrame {
                 tEPlusPartidoGanadoActionPerformed(evt);
             }
         });
+        tEPlusPartidoGanado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tEPlusPartidoGanadoKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pEntrenadoresLayout = new javax.swing.GroupLayout(pEntrenadores);
         pEntrenadores.setLayout(pEntrenadoresLayout);
         pEntrenadoresLayout.setHorizontalGroup(
             pEntrenadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
             .addGroup(pEntrenadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pEntrenadoresLayout.createSequentialGroup()
                     .addGap(34, 34, 34)
@@ -443,7 +545,7 @@ public class VentanaMain extends javax.swing.JFrame {
                                 .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
                                 .addComponent(tESueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addContainerGap(38, Short.MAX_VALUE)))
+                    .addContainerGap(69, Short.MAX_VALUE)))
         );
         pEntrenadoresLayout.setVerticalGroup(
             pEntrenadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -482,6 +584,8 @@ public class VentanaMain extends javax.swing.JFrame {
 
         tpGeneral.addTab("Entrenadores", pEntrenadores);
 
+        pMantenedores.setBackground(new java.awt.Color(255, 255, 153));
+
         jLabel13.setText("Nombre:");
 
         jLabel14.setText("DNI:");
@@ -495,10 +599,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tMDNIActionPerformed(evt);
             }
         });
+        tMDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tMDNIKeyPressed(evt);
+            }
+        });
 
         tMNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tMNombreActionPerformed(evt);
+            }
+        });
+        tMNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tMNombreKeyPressed(evt);
             }
         });
 
@@ -507,10 +621,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tMTelefonoActionPerformed(evt);
             }
         });
+        tMTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tMTelefonoKeyPressed(evt);
+            }
+        });
 
         tMDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tMDireccionActionPerformed(evt);
+            }
+        });
+        tMDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tMDireccionKeyPressed(evt);
             }
         });
 
@@ -521,12 +645,22 @@ public class VentanaMain extends javax.swing.JFrame {
                 tMSueldoActionPerformed(evt);
             }
         });
+        tMSueldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tMSueldoKeyPressed(evt);
+            }
+        });
 
         lMPlusFijo.setText("Plus puesto fijo:");
 
         tMPlusFijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tMPlusFijoActionPerformed(evt);
+            }
+        });
+        tMPlusFijo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tMPlusFijoKeyPressed(evt);
             }
         });
 
@@ -556,14 +690,12 @@ public class VentanaMain extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addGap(18, 18, 18)
                 .addComponent(tMSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 416, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMantenedoresLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addGroup(pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cMFijo)
+                    .addComponent(tMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lMPlusFijo)
-                    .addComponent(tMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                    .addComponent(cMFijo))
+                .addGap(79, 79, 79))
             .addGroup(pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pMantenedoresLayout.createSequentialGroup()
                     .addGap(42, 42, 42)
@@ -579,22 +711,24 @@ public class VentanaMain extends javax.swing.JFrame {
                         .addComponent(tMDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tMTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tMDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(416, Short.MAX_VALUE)))
+                    .addContainerGap(446, Short.MAX_VALUE)))
         );
         pMantenedoresLayout.setVerticalGroup(
             pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pMantenedoresLayout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addComponent(cMFijo)
-                .addGap(27, 27, 27)
-                .addComponent(lMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tMSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMantenedoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cMFijo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(lMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
             .addGroup(pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pMantenedoresLayout.createSequentialGroup()
                     .addGap(21, 21, 21)
@@ -620,6 +754,8 @@ public class VentanaMain extends javax.swing.JFrame {
 
         tpGeneral.addTab("Mantenedores", pMantenedores);
 
+        pDirectivos.setBackground(new java.awt.Color(153, 204, 255));
+
         jLabel19.setText("Nombre:");
 
         jLabel20.setText("DNI:");
@@ -633,10 +769,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tDDNIActionPerformed(evt);
             }
         });
+        tDDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tDDNIKeyPressed(evt);
+            }
+        });
 
         tDNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tDNombreActionPerformed(evt);
+            }
+        });
+        tDNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tDNombreKeyPressed(evt);
             }
         });
 
@@ -645,10 +791,20 @@ public class VentanaMain extends javax.swing.JFrame {
                 tDTelefonoActionPerformed(evt);
             }
         });
+        tDTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tDTelefonoKeyPressed(evt);
+            }
+        });
 
         tDDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tDDireccionActionPerformed(evt);
+            }
+        });
+        tDDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tDDireccionKeyPressed(evt);
             }
         });
 
@@ -657,6 +813,11 @@ public class VentanaMain extends javax.swing.JFrame {
         tDSueldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tDSueldoActionPerformed(evt);
+            }
+        });
+        tDSueldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tDSueldoKeyPressed(evt);
             }
         });
 
@@ -687,7 +848,7 @@ public class VentanaMain extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
                 .addComponent(tDSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addComponent(jLabel25)
                 .addGap(18, 18, 18)
                 .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -695,7 +856,7 @@ public class VentanaMain extends javax.swing.JFrame {
                     .addComponent(bDelegado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bSecretario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addGap(114, 114, 114))
             .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pDirectivosLayout.createSequentialGroup()
                     .addGap(42, 42, 42)
@@ -711,32 +872,31 @@ public class VentanaMain extends javax.swing.JFrame {
                         .addComponent(tDDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tDDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tDTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(416, Short.MAX_VALUE)))
+                    .addContainerGap(446, Short.MAX_VALUE)))
         );
         pDirectivosLayout.setVerticalGroup(
             pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pDirectivosLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDirectivosLayout.createSequentialGroup()
-                        .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tDSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDirectivosLayout.createSequentialGroup()
-                        .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pDirectivosLayout.createSequentialGroup()
-                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63))
-                            .addGroup(pDirectivosLayout.createSequentialGroup()
-                                .addComponent(bPresidente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bDelegado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bSecretario)))
-                        .addGap(42, 42, 42)
-                        .addComponent(cDActivo)
-                        .addGap(40, 40, 40))))
+                .addContainerGap(196, Short.MAX_VALUE)
+                .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tDSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
+            .addGroup(pDirectivosLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pDirectivosLayout.createSequentialGroup()
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))
+                    .addGroup(pDirectivosLayout.createSequentialGroup()
+                        .addComponent(bPresidente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bDelegado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bSecretario)))
+                .addGap(42, 42, 42)
+                .addComponent(cDActivo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pDirectivosLayout.createSequentialGroup()
                     .addGap(21, 21, 21)
@@ -762,12 +922,17 @@ public class VentanaMain extends javax.swing.JFrame {
 
         tpGeneral.addTab("Directivos", pDirectivos);
 
+        areaMuestra.setBackground(new java.awt.Color(204, 204, 204));
+        areaMuestra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         areaMuestra.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(areaMuestra);
+
+        labelIcono.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jMenu1.setText("Archivo");
 
         jmiGrabar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmiGrabar.setIcon(new ImageIcon("grabar.png"));
         jmiGrabar.setText("Grabar");
         jmiGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -777,6 +942,7 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu1.add(jmiGrabar);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setIcon(new ImageIcon("borrar.png"));
         jMenuItem2.setText("Borrar línea");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -786,6 +952,7 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setIcon(new ImageIcon("limpiar.png"));
         jMenuItem3.setText("Vaciar lista");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -795,6 +962,7 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setIcon(new ImageIcon("rellenar.png"));
         jMenuItem4.setText("Llenar lista");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -808,6 +976,7 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu2.setText("E / S Archivos");
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setIcon(new ImageIcon("importar.png"));
         jMenuItem5.setText("Importar");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -817,6 +986,7 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem6.setIcon(new ImageIcon("exportar.png"));
         jMenuItem6.setText("Exportar");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -827,6 +997,7 @@ public class VentanaMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jmSalir.setIcon(new ImageIcon("salir.png"));
         jmSalir.setMnemonic('S');
         jmSalir.setText("Salir");
         jmSalir.addMenuListener(new javax.swing.event.MenuListener() {
@@ -858,10 +1029,13 @@ public class VentanaMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(tpGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tpGeneral)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -869,11 +1043,14 @@ public class VentanaMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tpGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                    .addComponent(labelIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tJDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tJDNIActionPerformed
@@ -1121,6 +1298,126 @@ public class VentanaMain extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cMFijoMouseClicked
 
+    private void tJNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJNombreKeyPressed
+        tJNombre.setBackground(Color.white);
+    }//GEN-LAST:event_tJNombreKeyPressed
+
+    private void tJDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJDNIKeyPressed
+        tJDNI.setBackground(Color.white);
+    }//GEN-LAST:event_tJDNIKeyPressed
+
+    private void tJDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJDireccionKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);
+    }//GEN-LAST:event_tJDireccionKeyPressed
+
+    private void tJTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJTelefonoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);
+    }//GEN-LAST:event_tJTelefonoKeyPressed
+
+    private void tJPGanadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJPGanadosKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);
+    }//GEN-LAST:event_tJPGanadosKeyPressed
+
+    private void tJNumeroGolesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJNumeroGolesKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tJNumeroGolesKeyPressed
+
+    private void tJPlusPorGolKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJPlusPorGolKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tJPlusPorGolKeyPressed
+
+    private void tJPlusPartidoGanadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJPlusPartidoGanadoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tJPlusPartidoGanadoKeyPressed
+
+    private void tJSueldoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tJSueldoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tJSueldoKeyPressed
+
+    private void tENombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tENombreKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tENombreKeyPressed
+
+    private void tEDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tEDNIKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tEDNIKeyPressed
+
+    private void tEDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tEDireccionKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tEDireccionKeyPressed
+
+    private void tETelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tETelefonoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tETelefonoKeyPressed
+
+    private void tEPGanadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tEPGanadosKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tEPGanadosKeyPressed
+
+    private void tEPlusPartidoGanadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tEPlusPartidoGanadoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tEPlusPartidoGanadoKeyPressed
+
+    private void tESueldoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tESueldoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tESueldoKeyPressed
+
+    private void tMNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tMNombreKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tMNombreKeyPressed
+
+    private void tMDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tMDNIKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tMDNIKeyPressed
+
+    private void tMDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tMDireccionKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tMDireccionKeyPressed
+
+    private void tMTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tMTelefonoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tMTelefonoKeyPressed
+
+    private void tMSueldoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tMSueldoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tMSueldoKeyPressed
+
+    private void tMPlusFijoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tMPlusFijoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tMPlusFijoKeyPressed
+
+    private void tDNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDNombreKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tDNombreKeyPressed
+
+    private void tDDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDDNIKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tDDNIKeyPressed
+
+    private void tDDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDDireccionKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tDDireccionKeyPressed
+
+    private void tDTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDTelefonoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tDTelefonoKeyPressed
+
+    private void tDSueldoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDSueldoKeyPressed
+        ((JTextField)evt.getSource()).setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_tDSueldoKeyPressed
+
+    private void tpGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tpGeneralMouseClicked
+        if(tpGeneral.getSelectedComponent() == pJugadores){
+            labelIcono.setIcon(new ImageIcon("jugador.png"));
+        }else if(tpGeneral.getSelectedComponent() == pDirectivos){
+            labelIcono.setIcon(new ImageIcon("directivo.png"));
+        }else if(tpGeneral.getSelectedComponent() == pMantenedores){
+            labelIcono.setIcon(new ImageIcon("mantenedor.png"));
+        }if(tpGeneral.getSelectedComponent() == pEntrenadores){
+            labelIcono.setIcon(new ImageIcon("entrenador.png"));
+        }
+    }//GEN-LAST:event_tpGeneralMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1210,6 +1507,7 @@ public class VentanaMain extends javax.swing.JFrame {
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenuItem jmiGrabar;
     private javax.swing.JLabel lMPlusFijo;
+    private javax.swing.JLabel labelIcono;
     private javax.swing.JPanel pDirectivos;
     private javax.swing.JPanel pEntrenadores;
     private javax.swing.JPanel pJugadores;
@@ -1331,6 +1629,8 @@ public class VentanaMain extends javax.swing.JFrame {
             if(textField.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "El campo "+ nombreCampo + " está vacío", "Campo vacío", JOptionPane.ERROR_MESSAGE);
                 textField.requestFocus();
+                textField.setBackground(Color.red);
+                
                 return false;
             
             }else
