@@ -1,5 +1,15 @@
 
+import clases.Directivo;
+import clases.Entrenador;
 import clases.Jugador;
+import clases.Mantenedor;
+import clases.Personal;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -17,12 +27,17 @@ public class VentanaMain extends javax.swing.JFrame {
     /**
      * Creates new form VentanaMain
      */
+    
+    DefaultListModel modelo;
+    
     public VentanaMain() {
         initComponents();
-        lMPlusPartidoGanado.setVisible(false);
-        tMPlusPartidoGanado.setVisible(false);
         
+        modelo = new DefaultListModel<>();
+        areaMuestra.setModel(modelo);
         
+        lMPlusFijo.setVisible(false);
+        tMPlusFijo.setVisible(false);
     }
 
     /**
@@ -55,7 +70,6 @@ public class VentanaMain extends javax.swing.JFrame {
         bDelantero = new javax.swing.JRadioButton();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        tJFechaNacimiento = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel29 = new javax.swing.JLabel();
         tJPlusPartidoGanado = new javax.swing.JTextField();
@@ -63,6 +77,7 @@ public class VentanaMain extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         tJPlusPorGol = new javax.swing.JTextField();
+        tJFechaNacimiento = new javax.swing.JSpinner();
         pEntrenadores = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -89,8 +104,8 @@ public class VentanaMain extends javax.swing.JFrame {
         tMDireccion = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         tMSueldo = new javax.swing.JTextField();
-        lMPlusPartidoGanado = new javax.swing.JLabel();
-        tMPlusPartidoGanado = new javax.swing.JTextField();
+        lMPlusFijo = new javax.swing.JLabel();
+        tMPlusFijo = new javax.swing.JTextField();
         cMFijo = new javax.swing.JCheckBox();
         pDirectivos = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
@@ -108,8 +123,8 @@ public class VentanaMain extends javax.swing.JFrame {
         bSecretario = new javax.swing.JRadioButton();
         jLabel25 = new javax.swing.JLabel();
         cDActivo = new javax.swing.JCheckBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        areaMuestra = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        areaMuestra = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmiGrabar = new javax.swing.JMenuItem();
@@ -184,12 +199,6 @@ public class VentanaMain extends javax.swing.JFrame {
 
         jLabel28.setText("Fecha Nacimiento:");
 
-        tJFechaNacimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tJFechaNacimientoActionPerformed(evt);
-            }
-        });
-
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel29.setText("Plus Partido Ganado:");
@@ -215,6 +224,8 @@ public class VentanaMain extends javax.swing.JFrame {
                 tJPlusPorGolActionPerformed(evt);
             }
         });
+
+        tJFechaNacimiento.setModel(new javax.swing.SpinnerDateModel());
 
         javax.swing.GroupLayout pJugadoresLayout = new javax.swing.GroupLayout(pJugadores);
         pJugadores.setLayout(pJugadoresLayout);
@@ -246,10 +257,10 @@ public class VentanaMain extends javax.swing.JFrame {
                                 .addComponent(bDelantero)))
                         .addComponent(tJTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tJPGanados, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(7, 7, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pJugadoresLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -258,7 +269,7 @@ public class VentanaMain extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tJFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tJFechaNacimiento))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pJugadoresLayout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -271,7 +282,7 @@ public class VentanaMain extends javax.swing.JFrame {
                         .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tJNumeroGoles, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pJugadoresLayout.setVerticalGroup(
             pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,11 +308,14 @@ public class VentanaMain extends javax.swing.JFrame {
                                                 .addGap(63, 63, 63)
                                                 .addComponent(tJDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pJugadoresLayout.createSequentialGroup()
-                                        .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(bPortero)
-                                            .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tJFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(bPortero)
+                                                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(pJugadoresLayout.createSequentialGroup()
+                                                .addGap(5, 5, 5)
+                                                .addComponent(tJFechaNacimiento)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(pJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -400,7 +414,7 @@ public class VentanaMain extends javax.swing.JFrame {
         pEntrenadores.setLayout(pEntrenadoresLayout);
         pEntrenadoresLayout.setHorizontalGroup(
             pEntrenadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 709, Short.MAX_VALUE)
+            .addGap(0, 719, Short.MAX_VALUE)
             .addGroup(pEntrenadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pEntrenadoresLayout.createSequentialGroup()
                     .addGap(34, 34, 34)
@@ -429,7 +443,7 @@ public class VentanaMain extends javax.swing.JFrame {
                                 .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
                                 .addComponent(tESueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addContainerGap(29, Short.MAX_VALUE)))
+                    .addContainerGap(38, Short.MAX_VALUE)))
         );
         pEntrenadoresLayout.setVerticalGroup(
             pEntrenadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,15 +522,30 @@ public class VentanaMain extends javax.swing.JFrame {
             }
         });
 
-        lMPlusPartidoGanado.setText("Plus partido ganado:");
+        lMPlusFijo.setText("Plus puesto fijo:");
 
-        tMPlusPartidoGanado.addActionListener(new java.awt.event.ActionListener() {
+        tMPlusFijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tMPlusPartidoGanadoActionPerformed(evt);
+                tMPlusFijoActionPerformed(evt);
             }
         });
 
         cMFijo.setText("Fijo");
+        cMFijo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cMFijoMouseClicked(evt);
+            }
+        });
+        cMFijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cMFijoActionPerformed(evt);
+            }
+        });
+        cMFijo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cMFijoPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout pMantenedoresLayout = new javax.swing.GroupLayout(pMantenedores);
         pMantenedores.setLayout(pMantenedoresLayout);
@@ -527,13 +556,13 @@ public class VentanaMain extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addGap(18, 18, 18)
                 .addComponent(tMSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 406, Short.MAX_VALUE))
+                .addGap(66, 416, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMantenedoresLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cMFijo)
-                    .addComponent(lMPlusPartidoGanado)
-                    .addComponent(tMPlusPartidoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lMPlusFijo)
+                    .addComponent(tMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48))
             .addGroup(pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pMantenedoresLayout.createSequentialGroup()
@@ -550,7 +579,7 @@ public class VentanaMain extends javax.swing.JFrame {
                         .addComponent(tMDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tMTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tMDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(406, Short.MAX_VALUE)))
+                    .addContainerGap(416, Short.MAX_VALUE)))
         );
         pMantenedoresLayout.setVerticalGroup(
             pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,9 +587,9 @@ public class VentanaMain extends javax.swing.JFrame {
                 .addContainerGap(68, Short.MAX_VALUE)
                 .addComponent(cMFijo)
                 .addGap(27, 27, 27)
-                .addComponent(lMPlusPartidoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tMPlusPartidoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tMPlusFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pMantenedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tMSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -666,7 +695,7 @@ public class VentanaMain extends javax.swing.JFrame {
                     .addComponent(bDelegado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bSecretario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
             .addGroup(pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pDirectivosLayout.createSequentialGroup()
                     .addGap(42, 42, 42)
@@ -682,7 +711,7 @@ public class VentanaMain extends javax.swing.JFrame {
                         .addComponent(tDDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tDDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tDTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(406, Short.MAX_VALUE)))
+                    .addContainerGap(416, Short.MAX_VALUE)))
         );
         pDirectivosLayout.setVerticalGroup(
             pDirectivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -733,9 +762,8 @@ public class VentanaMain extends javax.swing.JFrame {
 
         tpGeneral.addTab("Directivos", pDirectivos);
 
-        areaMuestra.setColumns(20);
-        areaMuestra.setRows(5);
-        jScrollPane1.setViewportView(areaMuestra);
+        areaMuestra.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(areaMuestra);
 
         jMenu1.setText("Archivo");
 
@@ -830,9 +858,9 @@ public class VentanaMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tpGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(tpGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -840,9 +868,9 @@ public class VentanaMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tpGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -944,13 +972,9 @@ public class VentanaMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tEPlusPartidoGanadoActionPerformed
 
-    private void tMPlusPartidoGanadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tMPlusPartidoGanadoActionPerformed
+    private void tMPlusFijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tMPlusFijoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tMPlusPartidoGanadoActionPerformed
-
-    private void tJFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tJFechaNacimientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tJFechaNacimientoActionPerformed
+    }//GEN-LAST:event_tMPlusFijoActionPerformed
 
     private void tJPlusPartidoGanadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tJPlusPartidoGanadoActionPerformed
         // TODO add your handling code here:
@@ -983,28 +1007,86 @@ public class VentanaMain extends javax.swing.JFrame {
                 break;
             }
         }catch(Exception e){
+            System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Alguno de los campos introducidos no tiene un formato válido. Probablemente será un valor numérico", "Error de formato", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jmiGrabarActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        if(areaMuestra.getSelectedIndex() != -1){
+            modelo.removeElementAt(areaMuestra.getSelectedIndex());
+            JOptionPane.showMessageDialog(this, "Fila borrada correctamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        }else
+            JOptionPane.showMessageDialog(this, "No has seleccionado ninguna línea para borrar", "Error de selección en la lista", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        modelo.removeAllElements();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        Personal jugador = new Jugador("Portero", 1200, "04/01/2003", 200, 4, 100, "Alberto", "70096432B", "C/Plasencia 32 1º 2", "733622920", 5);
+        Personal entrenador = new Entrenador(2100, 300, "David", "68235821X", "C/Guatemala 65 5º F", "693153845", 3);
+        Personal mantenedor = new Mantenedor(800, true, 250, "Mia", "84620573F", "C/Nicaragua 12 2º A", "634932578");
+        Personal directivo = new Directivo("Secretario", 1100, false, "Adrián", "62390032E", "C/Caceres 2 Bajo 1", "609345814");
+        
+        modelo.addElement(jugador);
+        modelo.addElement(entrenador);
+        modelo.addElement(mantenedor);
+        modelo.addElement(directivo);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        String cadena = "";
+        
+        JFileChooser fc = new JFileChooser();
+        int i = fc.showOpenDialog(this);
+        
+        if(i==JFileChooser.APPROVE_OPTION){
+            File fichero = fc.getSelectedFile();
+            
+            try(FileReader fr = new FileReader(fichero)){
+                int valor = fr.read();
+                while(valor!=-1){
+                    cadena+=(char)valor;
+                    valor = fr.read();
+                }
+            
+                cadena = cadena.replaceAll(", ", "\n");
+                cadena = cadena.replaceAll("\\[", "");
+                cadena = cadena.replaceAll("\\]", "");
+                
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Error en la lectura de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        modelo.removeAllElements();
+        
+        String[] cadenas = cadena.split("\n");
+        
+        for(int j=0; j < cadenas.length; j++)
+        modelo.addElement(cadenas[j]);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+        System.out.println(modelo.toString());
+        
+        JFileChooser fc = new JFileChooser();
+        int i = fc.showOpenDialog(this);
+        
+        if(i==JFileChooser.APPROVE_OPTION){
+            File fichero = fc.getSelectedFile();
+            
+            try(FileWriter fw = new FileWriter(fichero)){
+                
+                fw.write(modelo.toString());
+                            
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Error en la escritura de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Datos escritos correctamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
@@ -1018,6 +1100,26 @@ public class VentanaMain extends javax.swing.JFrame {
     private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jmSalirMouseClicked
+
+    private void cMFijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cMFijoActionPerformed
+
+    }//GEN-LAST:event_cMFijoActionPerformed
+
+    private void cMFijoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cMFijoPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cMFijoPropertyChange
+
+    private void cMFijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cMFijoMouseClicked
+        if(cMFijo.isSelected()){
+            tMPlusFijo.setVisible(true);
+            lMPlusFijo.setVisible(true);
+            
+        }else{
+            tMPlusFijo.setVisible(false);
+            lMPlusFijo.setVisible(false);
+        }
+
+    }//GEN-LAST:event_cMFijoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1055,7 +1157,7 @@ public class VentanaMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea areaMuestra;
+    private javax.swing.JList<String> areaMuestra;
     private javax.swing.JRadioButton bDefensa;
     private javax.swing.JRadioButton bDelantero;
     private javax.swing.JRadioButton bDelegado;
@@ -1103,11 +1205,11 @@ public class VentanaMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenuItem jmiGrabar;
-    private javax.swing.JLabel lMPlusPartidoGanado;
+    private javax.swing.JLabel lMPlusFijo;
     private javax.swing.JPanel pDirectivos;
     private javax.swing.JPanel pEntrenadores;
     private javax.swing.JPanel pJugadores;
@@ -1126,7 +1228,7 @@ public class VentanaMain extends javax.swing.JFrame {
     private javax.swing.JTextField tETelefono;
     private javax.swing.JTextField tJDNI;
     private javax.swing.JTextField tJDireccion;
-    private javax.swing.JTextField tJFechaNacimiento;
+    private javax.swing.JSpinner tJFechaNacimiento;
     private javax.swing.JTextField tJNombre;
     private javax.swing.JTextField tJNumeroGoles;
     private javax.swing.JTextField tJPGanados;
@@ -1137,7 +1239,7 @@ public class VentanaMain extends javax.swing.JFrame {
     private javax.swing.JTextField tMDNI;
     private javax.swing.JTextField tMDireccion;
     private javax.swing.JTextField tMNombre;
-    private javax.swing.JTextField tMPlusPartidoGanado;
+    private javax.swing.JTextField tMPlusFijo;
     private javax.swing.JTextField tMSueldo;
     private javax.swing.JTextField tMTelefono;
     private javax.swing.JTabbedPane tpGeneral;
@@ -1150,7 +1252,6 @@ public class VentanaMain extends javax.swing.JFrame {
            !compruebaCampoVacio(tJTelefono, "Teléfono") ||
            !compruebaCampoVacio(tJPGanados, "Partidos Ganados") ||
            !compruebaCampoVacio(tJSueldo, "Sueldo") ||
-           !compruebaCampoVacio(tJFechaNacimiento, "Fecha de Nacimiento") ||
            !compruebaCampoVacio( tJPlusPartidoGanado, "Plus por Partido Ganado") ||
            !compruebaCampoVacio(tJNumeroGoles, "Numero de Goles") ||
            !compruebaCampoVacio(tJPlusPorGol, "Plus por Gol"))
@@ -1166,23 +1267,64 @@ public class VentanaMain extends javax.swing.JFrame {
             return;
         }
         
-        //FALTA FORMATEAR FECHA Y COMPROBAR CAMPOS NUMERICOS CON UNA EXCEPCION Y TRATADO DE ERRORES
-        Jugador nuevoJugador = new Jugador(posicion, Double.parseDouble(tJSueldo.getText()), "fecha", Double.parseDouble(tJPlusPartidoGanado.getText()), Integer.parseInt(tJNumeroGoles.getText()), Double.parseDouble(tJPlusPorGol.getText()), tJNombre.getText(), tJDNI.getText(), tJDireccion.getText().toString(), tJTelefono.getText(), Integer.parseInt(tJPGanados.getText()));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         
-        areaMuestra.append(nuevoJugador.toString());
+        Personal nuevoPersonal = new Jugador(posicion, Double.parseDouble(tJSueldo.getText()), sdf.format(tJFechaNacimiento.getValue()), Double.parseDouble(tJPlusPartidoGanado.getText()), Integer.parseInt(tJNumeroGoles.getText()), Double.parseDouble(tJPlusPorGol.getText()), tJNombre.getText(), tJDNI.getText(), tJDireccion.getText(), tJTelefono.getText(), Integer.parseInt(tJPGanados.getText()));
         
+        modelo.addElement(nuevoPersonal);
     }
 
     private void grabarEntrenador() throws Exception {
-        //COPIA, PEGA Y CAMBIA LOS ATRIBUTOS
+        if(!compruebaCampoVacio(tENombre, "Nombre") ||
+           !compruebaCampoVacio(tEDNI, "DNI") ||
+           !compruebaCampoVacio(tEDireccion, "Dirección") ||
+           !compruebaCampoVacio(tETelefono, "Teléfono") ||
+           !compruebaCampoVacio(tEPGanados, "Partidos Ganados") ||
+           !compruebaCampoVacio(tESueldo, "Sueldo") ||
+           !compruebaCampoVacio(tEPlusPartidoGanado, "Plus por Partido Ganado"))
+                return;
+        
+        
+        Personal nuevoPersonal = new Entrenador(Double.parseDouble(tESueldo.getText()), Double.parseDouble(tEPlusPartidoGanado.getText()), tENombre.getText(), tEDNI.getText(), tEDireccion.getText(), tETelefono.getText(), Integer.parseInt(tEPGanados.getText()));
+        
+        modelo.addElement(nuevoPersonal);
     }
 
     private void grabarMantenedor() throws Exception {
+        if(!compruebaCampoVacio(tMNombre, "Nombre") ||
+           !compruebaCampoVacio(tMDNI, "DNI") ||
+           !compruebaCampoVacio(tMDireccion, "Dirección") ||
+           !compruebaCampoVacio(tMTelefono, "Teléfono") ||
+           !compruebaCampoVacio(tMSueldo, "Sueldo") ||
+           (cMFijo.isSelected() && !compruebaCampoVacio(tMPlusFijo, "Plus Puesto Fijo")))
+                return;
         
+        Personal nuevoPersonal = new Mantenedor(Double.parseDouble(tMSueldo.getText()), cMFijo.isSelected(), Double.parseDouble(tMPlusFijo.getText()), tMNombre.getText(), tMDNI.getText(), tMDireccion.getText(), tMTelefono.getText());
+        
+        modelo.addElement(nuevoPersonal);
     }
 
     private void grabarDirectivo() throws Exception {
+        if(!compruebaCampoVacio(tDNombre, "Nombre") ||
+           !compruebaCampoVacio(tDDNI, "DNI") ||
+           !compruebaCampoVacio(tDDireccion, "Dirección") ||
+           !compruebaCampoVacio(tDTelefono, "Teléfono") ||
+           !compruebaCampoVacio(tDSueldo, "Sueldo"))
+                return;
         
+        String cargo = "";
+        if (bgCargoDirectivo.getSelection() == bPresidente.getModel()) cargo = "Presidente";
+        else if (bgCargoDirectivo.getSelection() == bDelegado.getModel()) cargo = "Delegado";
+        else if (bgCargoDirectivo.getSelection() == bSecretario.getModel()) cargo = "Secretario";
+        else {
+            JOptionPane.showMessageDialog(this, "No has seleccionado el cargo del directivo", "Campo vacío", JOptionPane.ERROR_MESSAGE);
+            bPresidente.requestFocus();
+            return;
+        }
+        
+        Personal nuevoPersonal = new Directivo(cargo, Double.parseDouble(tDSueldo.getText()), cDActivo.isSelected(), tDNombre.getText(), tDDNI.getText(), tDDireccion.getText(), tDTelefono.getText());
+        
+        modelo.addElement(nuevoPersonal);
     }
     
     private boolean compruebaCampoVacio(JTextField textField, String nombreCampo) {

@@ -125,11 +125,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="tpGeneral" min="-2" pref="709" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" alignment="0" min="-2" pref="709" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                  <Component id="tpGeneral" pref="719" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -140,9 +140,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tpGeneral" min="-2" pref="280" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="190" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" pref="196" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -197,10 +197,10 @@
                           </Group>
                           <Component id="tJPGanados" min="-2" pref="190" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="10" max="32767" attributes="0"/>
+                      <EmptySpace min="10" pref="7" max="32767" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="11" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -210,7 +210,7 @@
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tJFechaNacimiento" min="-2" pref="86" max="-2" attributes="0"/>
+                              <Component id="tJFechaNacimiento" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
@@ -228,7 +228,7 @@
                               <Component id="tJNumeroGoles" min="-2" pref="86" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -261,11 +261,16 @@
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel27" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                                  <Component id="bPortero" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel28" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                                  <Component id="tJFechaNacimiento" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="jLabel27" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                                      <Component id="bPortero" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel28" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
+                                                      <Component id="tJFechaNacimiento" max="32767" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
@@ -414,11 +419,6 @@
                 <Property name="text" type="java.lang.String" value="Fecha Nacimiento:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tJFechaNacimiento">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tJFechaNacimientoActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
               <Properties>
                 <Property name="orientation" type="int" value="1"/>
@@ -454,6 +454,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tJPlusPorGolActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JSpinner" name="tJFechaNacimiento">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="now" stepSize="5" type="date"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pEntrenadores">
@@ -468,7 +475,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="709" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="719" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -503,7 +510,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="29" max="32767" attributes="0"/>
+                          <EmptySpace pref="38" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -643,14 +650,14 @@
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="tMSueldo" min="-2" pref="190" max="-2" attributes="0"/>
-                      <EmptySpace min="66" pref="406" max="32767" attributes="0"/>
+                      <EmptySpace min="66" pref="416" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cMFijo" min="-2" max="-2" attributes="0"/>
-                          <Component id="lMPlusPartidoGanado" min="-2" max="-2" attributes="0"/>
-                          <Component id="tMPlusPartidoGanado" min="-2" pref="190" max="-2" attributes="0"/>
+                          <Component id="lMPlusFijo" min="-2" max="-2" attributes="0"/>
+                          <Component id="tMPlusFijo" min="-2" pref="190" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
@@ -672,7 +679,7 @@
                               <Component id="tMTelefono" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                               <Component id="tMDireccion" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="406" max="32767" attributes="0"/>
+                          <EmptySpace pref="416" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -683,9 +690,9 @@
                       <EmptySpace pref="68" max="32767" attributes="0"/>
                       <Component id="cMFijo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="lMPlusPartidoGanado" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="lMPlusFijo" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tMPlusPartidoGanado" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="tMPlusFijo" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tMSueldo" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
@@ -775,20 +782,25 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tMSueldoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lMPlusPartidoGanado">
+            <Component class="javax.swing.JLabel" name="lMPlusFijo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Plus partido ganado:"/>
+                <Property name="text" type="java.lang.String" value="Plus puesto fijo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tMPlusPartidoGanado">
+            <Component class="javax.swing.JTextField" name="tMPlusFijo">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tMPlusPartidoGanadoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tMPlusFijoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="cMFijo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fijo"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cMFijoMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cMFijoActionPerformed"/>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="cMFijoPropertyChange"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -818,7 +830,7 @@
                           <Component id="bPresidente" min="-2" pref="98" max="-2" attributes="0"/>
                           <Component id="bSecretario" min="-2" pref="98" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="125" max="32767" attributes="0"/>
+                      <EmptySpace pref="135" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -838,7 +850,7 @@
                               <Component id="tDDireccion" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                               <Component id="tDTelefono" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="406" max="32767" attributes="0"/>
+                          <EmptySpace pref="416" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -998,18 +1010,23 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="areaMuestra">
+        <Component class="javax.swing.JList" name="areaMuestra">
           <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="selectionMode" type="int" value="0"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
