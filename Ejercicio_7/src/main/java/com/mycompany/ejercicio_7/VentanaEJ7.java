@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,7 +24,6 @@ public class VentanaEJ7 extends javax.swing.JFrame {
      */
     public VentanaEJ7() {
         initComponents();
-    
     }
 
     /**
@@ -82,7 +82,7 @@ public class VentanaEJ7 extends javax.swing.JFrame {
             }
         });
 
-        numeroHoras.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        numeroHoras.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.5d));
         numeroHoras.setOpaque(true);
         numeroHoras.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -154,7 +154,7 @@ public class VentanaEJ7 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Precio de hora de trabajo:");
 
-        precioHoraTrabajo.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        precioHoraTrabajo.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.5d));
         precioHoraTrabajo.setOpaque(true);
         precioHoraTrabajo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -410,8 +410,8 @@ public class VentanaEJ7 extends javax.swing.JFrame {
         codigo.setText("");
         descripcion.setText("");
         nombre.setText("");
-        numeroHoras.setValue(0);
-        precioHoraTrabajo.setValue(0);
+        numeroHoras.setModel(new SpinnerNumberModel((double)0, (double)0, null, 0.5));
+        precioHoraTrabajo.setModel(new SpinnerNumberModel((double)0, (double)0, null, 0.5));
     }//GEN-LAST:event_addActionPerformed
 
     private void numeroHorasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numeroHorasStateChanged
