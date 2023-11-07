@@ -345,7 +345,22 @@ public class VentanaEJ7 extends javax.swing.JFrame {
     }//GEN-LAST:event_borrarFilaActionPerformed
 
     private void vaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaciarActionPerformed
-        tabla.setModel(new DefaultTableModel());
+        tabla.setModel(new DefaultTableModel(
+    new Object [][] {
+
+    },
+    new String [] {
+        "Código", "Descripción", "Número de Horas", "Nombre", "Precio/hora ", "Coste toal"
+    }
+) {
+    Class[] types = new Class [] {
+        java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+    };
+
+    public Class getColumnClass(int columnIndex) {
+        return types [columnIndex];
+    }
+});
     }//GEN-LAST:event_vaciarActionPerformed
 
     private void rellenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenarActionPerformed
