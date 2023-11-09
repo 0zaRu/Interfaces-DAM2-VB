@@ -2,14 +2,24 @@
 import java.awt.Font;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.StyledEditorKit;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author 6002754
@@ -33,16 +43,16 @@ public class VentanaEditor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        editor = new javax.swing.JEditorPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         sTamTexto = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         cbFuente = new javax.swing.JComboBox<>();
-        bNegrita = new javax.swing.JToggleButton();
-        bCursiva = new javax.swing.JToggleButton();
-        bSubrayado = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        editor = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -55,33 +65,42 @@ public class VentanaEditor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        editor.setContentType("text/html"); // NOI18N
-        jScrollPane1.setViewportView(editor);
-
         jLabel1.setText("T.Texto:");
+
+        sTamTexto.setModel(new javax.swing.SpinnerNumberModel(12, 6, 24, 1));
+        sTamTexto.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sTamTextoStateChanged(evt);
+            }
+        });
 
         jLabel2.setText("Fuente:");
 
-        cbFuente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        bNegrita.setText("N");
-        bNegrita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bNegritaActionPerformed(evt);
+        cbFuente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Segoe UI", "Serif", "Arial", "Times New Roman", "Consolas", "Comic Sans MS" }));
+        cbFuente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbFuenteItemStateChanged(evt);
             }
         });
 
-        bCursiva.setText("C");
-        bCursiva.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("N");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCursivaActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        bSubrayado.setText("S");
-        bSubrayado.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("C");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSubrayadoActionPerformed(evt);
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("S");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -90,21 +109,20 @@ public class VentanaEditor extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bNegrita)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bCursiva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bSubrayado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sTamTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(4, 4, 4)
                 .addComponent(cbFuente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,11 +133,13 @@ public class VentanaEditor extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(cbFuente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(bNegrita)
-                    .addComponent(bCursiva)
-                    .addComponent(bSubrayado))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        jScrollPane2.setViewportView(editor);
 
         jMenu1.setText("Archivo");
 
@@ -147,6 +167,11 @@ public class VentanaEditor extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setText("Copiar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -160,6 +185,11 @@ public class VentanaEditor extends javax.swing.JFrame {
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem3.setText("Cortar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -193,11 +223,11 @@ public class VentanaEditor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -205,7 +235,7 @@ public class VentanaEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -213,7 +243,7 @@ public class VentanaEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        editor.paste();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jmSalirMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmSalirMenuSelected
@@ -229,28 +259,135 @@ public class VentanaEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int i = fc.showOpenDialog(this);
         
+        if(i==JFileChooser.APPROVE_OPTION){
+            File fichero = fc.getSelectedFile();
+            
+            try(FileWriter fw = new FileWriter(fichero)){
+                
+                fw.write(editor.getText());
+                            
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Error en la escritura de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Datos escritos correctamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-    
+        String cadena = "";
+        
+        JFileChooser fc = new JFileChooser();
+        int i = fc.showOpenDialog(this);
+        
+        if(i==JFileChooser.APPROVE_OPTION){
+            File fichero = fc.getSelectedFile();
+            
+            try(FileReader fr = new FileReader(fichero)){
+                int valor = fr.read();
+                while(valor!=-1){
+                    cadena+=(char)valor;
+                    valor = fr.read();
+                }
+            
+                cadena = cadena.replaceAll(", ", "\n");
+                cadena = cadena.replaceAll("\\[", "");
+                cadena = cadena.replaceAll("\\]", "");
+                
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Error en la lectura de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        editor.setText(cadena);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void bNegritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNegritaActionPerformed
-        String marcado = editor.getSelectedText();
-        if(bNegrita.isSelected()){
-            editor.setFont(new Font(editor.getFont().getName(), 3, editor.getFont().getSize()));
-            editor.replaceSelection(marcado);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        StyledDocument doc = (StyledDocument) editor.getDocument();
+
+        int selectionEnd = editor.getSelectionEnd();
+        int selectionStart = editor.getSelectionStart();
+        if (selectionStart == selectionEnd) {
+            SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+            StyleConstants.setBold(attributeSet, true);
+            editor.setCharacterAttributes(attributeSet, true);
+        } else {
+            Element element = doc.getCharacterElement(selectionStart);
+            AttributeSet as = element.getAttributes();
+            MutableAttributeSet asNew = new SimpleAttributeSet(as.copyAttributes());
+            StyleConstants.setBold(asNew, !StyleConstants.isBold(as));
+            doc.setCharacterAttributes(selectionStart, editor.getSelectedText().length(), asNew, true);
         }
-    }//GEN-LAST:event_bNegritaActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void bCursivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCursivaActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        StyledDocument doc = (StyledDocument) editor.getDocument();
 
-    }//GEN-LAST:event_bCursivaActionPerformed
+        int selectionEnd = editor.getSelectionEnd();
+        int selectionStart = editor.getSelectionStart();
+        if (selectionStart == selectionEnd) {
+            SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+            StyleConstants.setItalic(attributeSet, true);
+            editor.setCharacterAttributes(attributeSet, true);
+        } else {
+            Element element = doc.getCharacterElement(selectionStart);
+            AttributeSet as = element.getAttributes();
+            MutableAttributeSet asNew = new SimpleAttributeSet(as.copyAttributes());
+            StyleConstants.setItalic(asNew, !StyleConstants.isItalic(as));
+            doc.setCharacterAttributes(selectionStart, editor.getSelectedText().length(), asNew, true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void bSubrayadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubrayadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bSubrayadoActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        StyledDocument doc = (StyledDocument) editor.getDocument();
+
+        int selectionEnd = editor.getSelectionEnd();
+        int selectionStart = editor.getSelectionStart();
+        if (selectionStart == selectionEnd) {
+            SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+            StyleConstants.setUnderline(attributeSet, true);
+            editor.setCharacterAttributes(attributeSet, true);
+        } else {
+            Element element = doc.getCharacterElement(selectionStart);
+            AttributeSet as = element.getAttributes();
+            MutableAttributeSet asNew = new SimpleAttributeSet(as.copyAttributes());
+            StyleConstants.setUnderline(asNew, !StyleConstants.isUnderline(as));
+            doc.setCharacterAttributes(selectionStart, editor.getSelectedText().length(), asNew, true);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void sTamTextoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sTamTextoStateChanged
+
+        StyledDocument doc = editor.getStyledDocument();
+
+        SimpleAttributeSet attr = new SimpleAttributeSet();
+        StyleConstants.setFontSize(attr, (int) sTamTexto.getValue());
+
+        doc.setCharacterAttributes(editor.getSelectionStart(), editor.getSelectionEnd() - editor.getSelectionStart(), attr, false);
+
+    }//GEN-LAST:event_sTamTextoStateChanged
+
+    private void cbFuenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFuenteItemStateChanged
+
+        StyledDocument doc = editor.getStyledDocument();
+
+        SimpleAttributeSet attr = new SimpleAttributeSet();
+        StyleConstants.setFontFamily(attr, cbFuente.getSelectedItem().toString());
+
+        doc.setCharacterAttributes(editor.getSelectionStart(), editor.getSelectionEnd() - editor.getSelectionStart(), attr, false);
+
+    }//GEN-LAST:event_cbFuenteItemStateChanged
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        editor.copy();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        editor.cut();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,11 +425,11 @@ public class VentanaEditor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton bCursiva;
-    private javax.swing.JToggleButton bNegrita;
-    private javax.swing.JToggleButton bSubrayado;
     private javax.swing.JComboBox<String> cbFuente;
-    private javax.swing.JEditorPane editor;
+    private javax.swing.JTextPane editor;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -304,7 +441,7 @@ public class VentanaEditor extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JSpinner sTamTexto;
     // End of variables declaration//GEN-END:variables
