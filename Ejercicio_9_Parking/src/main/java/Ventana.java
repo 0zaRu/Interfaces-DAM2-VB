@@ -39,7 +39,7 @@ public class Ventana extends javax.swing.JFrame {
     static char letrasValidas[] = {'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'};
     static String listaNombres[] = {"Alberto", "Mía", "David", "Torralvo", "Achraf", "Renzo", "Adrián", "Yiawei", "Víctor", "Curto"};
     static String listaApellidos[] = {"Rodríguez", "Pérez", "Moreta", "Carro", "López", "Hernández", "Martín", "Xia", "Celador", "Nieves"};
-    static float precioPorSegundo = 2;
+    static float precioPorSegundo = 0.03f;
     
     static DialogInfo ventanaInfo = new DialogInfo(null, false);
     static DialogListas ventanaCochesIn = new DialogListas(null, false, listaCochesIn);
