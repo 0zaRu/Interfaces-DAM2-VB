@@ -4,6 +4,8 @@
  */
 package com.mycompany.ejercicio_10_calculadora;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author 6002754
@@ -72,7 +74,7 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
         bPorcentaje.setBackground(new java.awt.Color(249, 249, 249));
         bPorcentaje.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         bPorcentaje.setForeground(new java.awt.Color(0, 0, 0));
-        bPorcentaje.setText("%");
+        bPorcentaje.setIcon(new ImageIcon("porcentaje.png"));
         bPorcentaje.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         bLimpiado.setBackground(new java.awt.Color(249, 249, 249));
@@ -90,31 +92,31 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
         bBorrar.setBackground(new java.awt.Color(249, 249, 249));
         bBorrar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         bBorrar.setForeground(new java.awt.Color(0, 0, 0));
-        bBorrar.setText("<X|");
+        bBorrar.setIcon(new ImageIcon("delete.png"));
         bBorrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         bAMenos1.setBackground(new java.awt.Color(249, 249, 249));
         bAMenos1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         bAMenos1.setForeground(new java.awt.Color(0, 0, 0));
-        bAMenos1.setText("1/x");
+        bAMenos1.setIcon(new ImageIcon("fracc.png"));
         bAMenos1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         bAlCuadrado.setBackground(new java.awt.Color(249, 249, 249));
         bAlCuadrado.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         bAlCuadrado.setForeground(new java.awt.Color(0, 0, 0));
-        bAlCuadrado.setText("x^2");
+        bAlCuadrado.setIcon(new ImageIcon("exponente.png"));
         bAlCuadrado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         bRaizCuadrada.setBackground(new java.awt.Color(249, 249, 249));
         bRaizCuadrada.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         bRaizCuadrada.setForeground(new java.awt.Color(0, 0, 0));
-        bRaizCuadrada.setText("2Vx");
+        bRaizCuadrada.setIcon(new ImageIcon("raiz.png"));
         bRaizCuadrada.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         bDividir.setBackground(new java.awt.Color(249, 249, 249));
         bDividir.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         bDividir.setForeground(new java.awt.Color(0, 0, 0));
-        bDividir.setText("./.");
+        bDividir.setIcon(new ImageIcon("div.png"));
         bDividir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         b7.setBackground(new java.awt.Color(255, 255, 255));
@@ -209,16 +211,16 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
 
         bIfgual.setBackground(new java.awt.Color(0, 90, 158));
         bIfgual.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
-        bIfgual.setForeground(new java.awt.Color(0, 0, 0));
+        bIfgual.setForeground(new java.awt.Color(255, 255, 255));
         bIfgual.setText("=");
         bIfgual.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        tPantalla.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        tPantalla.setFont(new java.awt.Font("Malgun Gothic", 1, 36)); // NOI18N
         tPantalla.setForeground(new java.awt.Color(0, 0, 0));
         tPantalla.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         tPantalla.setText("888888888");
 
-        tPrevio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tPrevio.setFont(new java.awt.Font("Malgun Gothic", 0, 14)); // NOI18N
         tPrevio.setForeground(new java.awt.Color(102, 102, 102));
         tPrevio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         tPrevio.setText("15 +");
@@ -227,7 +229,7 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Calculadora Alberto");
 
-        labelHistorial.setText("hist");
+        labelHistorial.setIcon(new ImageIcon("historial.png"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -239,9 +241,10 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
                     .addComponent(tPrevio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tPantalla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(labelHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(bPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
@@ -280,7 +283,7 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(b9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(b6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bDecimal, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(bDecimal, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                             .addComponent(b3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -368,7 +371,7 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -385,8 +388,9 @@ public class Calculadora_Alberto extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Calculadora_Alberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        */
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
