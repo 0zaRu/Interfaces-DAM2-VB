@@ -179,6 +179,8 @@ public class Ventana_Alberto extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_START);
 
+        jPanel4.setPreferredSize(new java.awt.Dimension(600, 100));
+
         labelBlanco.setFont(new java.awt.Font("Malgun Gothic", 1, 24)); // NOI18N
         labelBlanco.setText("BLANCAS: VUESTRO TURNO");
         labelBlanco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -193,10 +195,10 @@ public class Ventana_Alberto extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addComponent(labelBlanco, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_END);
