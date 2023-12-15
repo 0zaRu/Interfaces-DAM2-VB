@@ -5,6 +5,7 @@
 package com.mycompany.mipaintedfilepanel;
 
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -12,6 +13,9 @@ import java.awt.Color;
  */
 public class Interruptor extends javax.swing.JPanel {
 
+    static private String keysPressed = "";
+    CambiaColor cambiaColor = new CambiaColor();
+    
     /**
      * Creates new form Interruptor
      */
@@ -32,6 +36,7 @@ public class Interruptor extends javax.swing.JPanel {
         jToggleButton1 = new javax.swing.JToggleButton();
         labelLuz = new javax.swing.JLabel();
         panelLuz = new javax.swing.JPanel();
+        miPaintedFilePanel1 = new com.mycompany.mipaintedfilepanel.MiPaintedFilePanel();
 
         jToggleButton1.setText("Interruptor");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,15 +86,50 @@ public class Interruptor extends javax.swing.JPanel {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        miPaintedFilePanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                miPaintedFilePanel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                miPaintedFilePanel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                miPaintedFilePanel1MouseExited(evt);
+            }
+        });
+        miPaintedFilePanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                miPaintedFilePanel1KeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout miPaintedFilePanel1Layout = new javax.swing.GroupLayout(miPaintedFilePanel1);
+        miPaintedFilePanel1.setLayout(miPaintedFilePanel1Layout);
+        miPaintedFilePanel1Layout.setHorizontalGroup(
+            miPaintedFilePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        miPaintedFilePanel1Layout.setVerticalGroup(
+            miPaintedFilePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(miPaintedFilePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(miPaintedFilePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -104,11 +144,52 @@ public class Interruptor extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    private void miPaintedFilePanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miPaintedFilePanel1MouseEntered
+        JPanel panel = (JPanel) evt.getSource();
+        panel.setBackground(Color.CYAN);
+    }//GEN-LAST:event_miPaintedFilePanel1MouseEntered
+
+    private void miPaintedFilePanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miPaintedFilePanel1MouseExited
+        JPanel panel = (JPanel) evt.getSource();
+        panel.setBackground(null);
+    }//GEN-LAST:event_miPaintedFilePanel1MouseExited
+
+    private void miPaintedFilePanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miPaintedFilePanel1MouseClicked
+        //MiPaintedFilePanel panel = (MiPaintedFilePanel) evt.getSource();
+        //panel.setRutaImg;
+    }//GEN-LAST:event_miPaintedFilePanel1MouseClicked
+
+    private void miPaintedFilePanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_miPaintedFilePanel1KeyPressed
+        keysPressed += evt.getKeyChar();
+        
+        if(cambiaColor== null && keysPressed.contains("arcoiris")){
+            cambiaColor.run();
+        }
+    }//GEN-LAST:event_miPaintedFilePanel1KeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel labelLuz;
+    private static com.mycompany.mipaintedfilepanel.MiPaintedFilePanel miPaintedFilePanel1;
     private javax.swing.JPanel panelLuz;
     // End of variables declaration//GEN-END:variables
+
+
+    class CambiaColor extends Thread{
+
+        @Override
+        public void run() {
+            while(true){
+                miPaintedFilePanel1.setBackground(Color.RED);
+                miPaintedFilePanel1.setBackground(Color.BLUE);
+                miPaintedFilePanel1.setBackground(Color.MAGENTA);
+                miPaintedFilePanel1.setBackground(Color.GREEN);
+                miPaintedFilePanel1.setBackground(Color.YELLOW);
+                miPaintedFilePanel1.setBackground(Color.CYAN);
+            }
+        }
+        
+    }
 }
